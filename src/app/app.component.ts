@@ -11,24 +11,6 @@ export class AppComponent implements OnInit{
   getCoords!: any
   watchCoords!: any
 
-  // options = {
-  //   layers: [
-  //     tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
-  //   ],
-  //   zoom: 13,
-  //   center: latLng(49.8113969, 24.0601598)
-  // };
-  //
-  // layersControl = {
-  //   baseLayers: {
-  //     'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' }),
-  //     'Open Cycle Map': tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
-  //   },
-  //   overlays: {
-  //     'Big Circle': circle([ 46.95, -122 ], { radius: 5000 }),
-  //     'Big Square': polygon([[ 46.8, -121.55 ], [ 46.9, -121.55 ], [ 46.9, -121.7 ], [ 46.8, -121.7 ]])
-  //   }
-  // }
   private myMap: any;
   private polygon: any;
   private marker: any;
@@ -37,8 +19,8 @@ export class AppComponent implements OnInit{
       iconSize: [ 25, 41 ],
       iconAnchor: [ 13, 0 ],
       // specify the path here
-      iconUrl: 'assets/images/marker-icon.png',
-      shadowUrl: 'assets/images/marker-shadow.png'
+      iconUrl: './assets/images/marker-icon.png',
+      shadowUrl: './assets/images/marker-shadow.png'
     })
   };
 
