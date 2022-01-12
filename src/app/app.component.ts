@@ -32,6 +32,15 @@ export class AppComponent implements OnInit{
   private myMap: any;
   private polygon: any;
   private marker: any;
+  private icon = {
+    icon: L.icon({
+      iconSize: [ 25, 41 ],
+      iconAnchor: [ 13, 0 ],
+      // specify the path here
+      iconUrl: 'assets/images/marker-icon.png',
+      shadowUrl: 'assets/images/marker-shadow.png'
+    })
+  };
 
   ngOnInit(): void {
     this.getPosition()
@@ -48,7 +57,7 @@ export class AppComponent implements OnInit{
         [49.813849842990436, 24.06225166645546],
         [49.81431368367828, 24.062294581809688]
       ]).addTo(this.myMap);
-      this.marker = L.marker([this.getCoords.latitude, this.getCoords.longitude]).addTo(this.myMap);
+      this.marker = L.marker([this.getCoords.latitude, this.getCoords.longitude], this.icon).addTo(this.myMap);
 
 
       L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGltYWduYXQiLCJhIjoiY2t5YmVwbmJyMGNlMTJ4cDVveDN2OWxxYiJ9.PGlUphR669ZJXBTkD4JCeg', {
