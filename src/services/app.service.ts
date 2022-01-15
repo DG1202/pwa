@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject} from "rxjs";
 
 export interface Polygon {
 name: string; color: string, coords: any[]
@@ -8,7 +9,7 @@ name: string; color: string, coords: any[]
   providedIn: 'root'
 })
 export class AppService {
- polygon!:Polygon
+ polygon: BehaviorSubject<Polygon> = new BehaviorSubject({name: '', color: 'orange', coords: []} as Polygon)
  polygons: Polygon[] = [
    {
      name: 'green',
@@ -64,6 +65,6 @@ export class AppService {
   constructor() { }
   
   setActivePolygon(polygon: Polygon) {
-     this.polygon = polygon;
+     this.polygon.next(polygon);
   }
 }

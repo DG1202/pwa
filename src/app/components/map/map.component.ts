@@ -37,17 +37,13 @@ export class MapComponent implements OnInit {
     navigator.geolocation.getCurrentPosition((position => {
       this.getCoords = position.coords
       this.myMap = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
-  
-      console.log(position.coords)
-      this.appService.polygons.forEach(polygon => {
-        this.polygons.push(L.polygon(polygon.coords, {color: polygon.color}).addTo(this.myMap))
-
-      })
       this.marker = L.marker([this.getCoords.latitude, this.getCoords.longitude], this.icon).addTo(this.myMap);
       
+      this.appService.polygons.forEach(polygon => {
+        this.polygons.push(L.polygon(polygon.coords, {color: polygon.color}).addTo(this.myMap))
+      })
+      
       L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGltYWduYXQiLCJhIjoiY2t5YmVwbmJyMGNlMTJ4cDVveDN2OWxxYiJ9.PGlUphR669ZJXBTkD4JCeg', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
         id: 'mapbox/streets-v11',
         tileSize: 512,
         zoomOffset: -1,
@@ -61,6 +57,7 @@ export class MapComponent implements OnInit {
       this.marker.setLatLng([this.watchCoords.latitude, this.watchCoords.longitude]).update();
       this.myMap.setView([this.watchCoords.latitude, this.watchCoords.longitude]);
       this.appService.polygons.forEach((polygon, index) => {
+        console.log(this.polygons[0])
         if(this.polygons[index].getBounds().contains([this.watchCoords.latitude, this.watchCoords.longitude])) {
           this.appService.setActivePolygon(polygon)
         }

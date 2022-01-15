@@ -1,3 +1,5 @@
 <header class="header" [ngStyle]="{backgroundColor: headerColor}">
-You are on {{zone}} zone
+  <span *ngIf="zone">
+      You are on {{zone}} zone
+  </span>
 </header>
