@@ -16,7 +16,7 @@ export class MapComponent implements OnInit {
   private icon = {
     icon: L.icon({
       iconSize: [ 25, 41 ],
-      iconAnchor: [ 13, 0 ],
+      iconAnchor: [ 13, 41 ],
       // specify the path here
       iconUrl: './assets/images/marker-icon.png',
       shadowUrl: './assets/images/marker-shadow.png'
@@ -57,7 +57,7 @@ export class MapComponent implements OnInit {
       this.marker.setLatLng([this.watchCoords.latitude, this.watchCoords.longitude]).update();
       this.myMap.setView([this.watchCoords.latitude, this.watchCoords.longitude]);
       this.appService.polygons.forEach((polygon, index) => {
-        console.log(this.polygons[0])
+        console.log(this.polygons)
         if(this.polygons[index].getBounds().contains([this.watchCoords.latitude, this.watchCoords.longitude])) {
           this.appService.setActivePolygon(polygon)
         }
