@@ -1,0 +1,71 @@
+<h2>Create polygon</h2>
+<form [formGroup]="polygonForm" (ngSubmit)="onSubmit(polygonForm.value)">
+    <div class="form-group-wrapper">
+        <div class="form-group-wrapper">
+            <div>
+                <label for="name">Name: </label>
+                <input id="name" type="text" formControlName="name">
+            </div>
+            <div>
+                <label for="color">Color: </label>
+                <input id="color" type="text" formControlName="color">
+            </div>
+        </div>
+    </div>
+
+
+    <div formGroupName="point1">
+        <h4>Point 1</h4>
+        <div class="form-group-wrapper">
+            <div>
+                <label for="latitude">Latitude: </label>
+                <input id="latitude" type="text" formControlName="latitude">
+            </div>
+            <div>
+                <label for="longitude">Longitude: </label>
+                <input id="longitude" type="text" formControlName="longitude">
+            </div>
+        </div>
+    </div>
+    <div formGroupName="point2">
+        <h4>Point 2</h4>
+        <div class="form-group-wrapper">
+            <div>
+                <label for="latitude2">Latitude: </label>
+                <input id="latitude2" type="text" formControlName="latitude">
+            </div>
+            <div>
+                <label for="longitude2">Longitude: </label>
+                <input id="longitude2" type="text" formControlName="longitude">
+            </div>
+        </div>
+    </div>
+    <div formGroupName="point3">
+        <h4>Point 3</h4>
+        <div class="form-group-wrapper">
+            <div>
+                <label for="latitude3">Latitude: </label>
+                <input id="latitude3" type="text" formControlName="latitude">
+            </div>
+            <div>
+                <label for="longitude3">Longitude: </label>
+                <input id="longitude3" type="text" formControlName="longitude">
+            </div>
+        </div>
+    </div>
+    <div formGroupName="point4">
+        <h4>Point 4</h4>
+        <div class="form-group-wrapper">
+            <div>
+                <label for="latitude4">Latitude: </label>
+                <input id="latitude4" type="text" formControlName="latitude">
+            </div>
+            <div>
+                <label for="longitude4">Longitude: </label>
+                <input id="longitude4" type="text" formControlName="longitude">
+            </div>
+        </div>
+
+    </div>
+    <button type="submit">Add polygon</button>
+</form>

@@ -1,0 +1,11 @@
+#map{
+    height: calc(100vh - 180px);
+    width: calc(90vw - 420px);
+}
+
+@media only screen and (max-width: 992px) {
+    #map {
+        height: calc(100vh - 180px);
+        width: calc(90vw);
+    }
+}
