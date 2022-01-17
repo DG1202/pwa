@@ -59,10 +59,20 @@ export class AppService {
        [49.80023348506256, 24.07098991130669],
        [49.797984974787674, 24.056013325254845]
      ]
+   },
+   {
+     color: "pink",
+     name: "pink",
+     coords: [
+       [49.8109106210456, 24.05771297670782],
+       [49.81073547074997, 24.064977135547522],
+       [49.813324231675466, 24.06493987406533],
+       [49.81409181125535, 24.054747689464833]
+     ]
    }
  ]
  polygon: BehaviorSubject<Polygon> = new BehaviorSubject({name: '', color: 'orange', coords: []} as Polygon)
- polygons: BehaviorSubject<Polygon[]> = new BehaviorSubject(JSON.parse(localStorage.getItem('polygons') || '') || this.mockedPolygons)
+ polygons: BehaviorSubject<Polygon[]> = new BehaviorSubject(JSON.parse(localStorage.getItem('polygons') || JSON.stringify(this.mockedPolygons)) || this.mockedPolygons)
   constructor() { }
   
   setActivePolygon(polygon: Polygon) {
