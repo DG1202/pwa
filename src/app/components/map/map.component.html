@@ -1,9 +1,13 @@
 <p>
-    <b>Get coords: </b> {{getCoords?.latitude}} - {{getCoords?.longitude}} watchCoords.altitude
+    <b>Get coords: </b> {{getCoords?.latitude}} - {{getCoords?.longitude}}
 </p>
 
 <p>
-    <b>Watch coords: </b> {{watchCoords?.latitude}} - {{watchCoords?.longitude}} - {{watchCoords.altitude}} - {{watchCoords.altitudeAccuracy }} - {{watchCoords.altitudeAngle}}
+    <b>Watch coords: </b> {{watchCoords?.latitude}} - {{watchCoords?.longitude}} - {{watchCoords?.altitude}} - {{watchCoords?.altitudeAccuracy }} - {{watchCoords?.altitudeAngle}}
+</p>
+
+<p>
+    <b>Watch coords object: </b> {{watchCoords | json}}
 </p>
 
 <div id="map"></div>

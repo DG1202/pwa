@@ -54,7 +54,7 @@ export class MapComponent implements OnInit {
   private watchPosition() {
     navigator.geolocation.watchPosition((position => {
       this.watchCoords = position.coords;
-      console.log(this.watchCoords.altitude)
+      console.log(this.watchCoords)
       console.log(this.watchCoords.altitudeAccuracy)
       console.log(this.watchCoords.altitudeAngle)
       this.marker.setLatLng([this.watchCoords.latitude, this.watchCoords.longitude]).update();
