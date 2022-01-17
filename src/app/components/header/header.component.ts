@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.appService.polygon.subscribe(polygon => {
-      console.log(polygon)
       this.headerColor = polygon.color;
       this.zone = polygon.name;
     })

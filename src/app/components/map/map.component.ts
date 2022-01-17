@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from "leaflet";
-import {AppService} from "../../../services/app.service";
+import {AppService, Polygon} from "../../../services/app.service";
 
 @Component({
   selector: 'app-map',
@@ -17,12 +17,12 @@ export class MapComponent implements OnInit {
     icon: L.icon({
       iconSize: [ 25, 41 ],
       iconAnchor: [ 13, 41 ],
-      // specify the path here
       iconUrl: './assets/images/marker-icon.png',
       shadowUrl: './assets/images/marker-shadow.png'
     })
   };
   private polygons: any[] = [];
+  private serverPolygons: Polygon[] = [];
   
   constructor(private appService: AppService) {
   }
@@ -39,8 +39,15 @@ export class MapComponent implements OnInit {
       this.myMap = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
       this.marker = L.marker([this.getCoords.latitude, this.getCoords.longitude], this.icon).addTo(this.myMap);
       
-      this.appService.polygons.forEach(polygon => {
-        this.polygons.push(L.polygon(polygon.coords, {color: polygon.color}).addTo(this.myMap))
+      this.appService.polygons.subscribe(polygons => {
+        const polygonsNames = this.serverPolygons.map(v => v.name)
+        const newPolygons = polygons.filter(polygon => {
+          return !(polygonsNames.includes(polygon.name))
+        })
+        this.serverPolygons = polygons
+        newPolygons.forEach(polygon => {
+          this.polygons.push(L.polygon(polygon.coords, {color: polygon.color}).addTo(this.myMap))
+        })
       })
       
       L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGltYWduYXQiLCJhIjoiY2t5YmVwbmJyMGNlMTJ4cDVveDN2OWxxYiJ9.PGlUphR669ZJXBTkD4JCeg', {
@@ -53,16 +60,17 @@ export class MapComponent implements OnInit {
   }
   private watchPosition() {
     navigator.geolocation.watchPosition((position => {
+      let isActivePolygon = false;
       this.watchCoords = position.coords;
-      console.log(this.watchCoords)
-      console.log(this.watchCoords.altitudeAccuracy)
-      console.log(this.watchCoords.altitudeAngle)
       this.marker.setLatLng([this.watchCoords.latitude, this.watchCoords.longitude]).update();
       this.myMap.setView([this.watchCoords.latitude, this.watchCoords.longitude]);
-      this.appService.polygons.forEach((polygon, index) => {
-        console.log(this.polygons)
+      this.serverPolygons.forEach((polygon, index) => {
         if(this.polygons[index].getBounds().contains([this.watchCoords.latitude, this.watchCoords.longitude])) {
-          this.appService.setActivePolygon(polygon)
+          this.appService.setActivePolygon(polygon);
+          isActivePolygon = true;
+        }
+        if(!isActivePolygon) {
+          this.appService.setActivePolygon({name: '', color: 'orange', coords: []} as Polygon);
         }
       })
       

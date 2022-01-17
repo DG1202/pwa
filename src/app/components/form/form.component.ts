@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AppService} from "../../../services/app.service";
 
 @Component({
   selector: 'app-form',
@@ -9,7 +10,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 export class FormComponent implements OnInit {
   polygonForm!: FormGroup
   
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private appService: AppService) { }
 
   ngOnInit(): void {
     this.initForm()
@@ -17,28 +18,28 @@ export class FormComponent implements OnInit {
   
   initForm() {
     this.polygonForm = this.fb.group({
-      name: [''],
-      color: [''],
+      name: ['', Validators.required],
+      color: ['', Validators.required],
       point1: this.fb.group({
-        latitude: [''],
-        longitude: [''],
+        latitude: ['', Validators.required],
+        longitude: ['', Validators.required],
       }),
       point2: this.fb.group({
-        latitude: [''],
-        longitude: [''],
+        latitude: ['', Validators.required],
+        longitude: ['', Validators.required],
       }),
       point3: this.fb.group({
-        latitude: [''],
-        longitude: [''],
+        latitude: ['', Validators.required],
+        longitude: ['', Validators.required],
       }),
       point4: this.fb.group({
-        latitude: [''],
-        longitude: [''],
+        latitude: ['', Validators.required],
+        longitude: ['', Validators.required],
       }),
     });
   }
   
-  onSubmit(value: any) {
-    console.log(value)
+  onSubmit(value: Number[][]) {
+    this.appService.addPolygon(value);
   }
 }
