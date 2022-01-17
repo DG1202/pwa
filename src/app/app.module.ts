@@ -11,6 +11,7 @@ import { MapComponent } from './components/map/map.component';
 import { FormComponent } from './components/form/form.component';
 import {HeaderComponent} from "./components/header/header.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import { PolygonsListComponent } from './components/polygons-list/polygons-list.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyClcHbQAauOW6mz_p6b6w8_fw1B3K9-YyE",
@@ -32,7 +33,8 @@ const analytics = getAnalytics(app);
     HeaderComponent,
     MainComponent,
     MapComponent,
-    FormComponent
+    FormComponent,
+    PolygonsListComponent
   ],
   imports: [
     BrowserModule,

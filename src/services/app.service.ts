@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, take} from "rxjs";
+import {BehaviorSubject, map, take} from "rxjs";
 
 export interface Polygon {
 name: string; color: string, coords: any[]
@@ -62,7 +62,7 @@ export class AppService {
    }
  ]
  polygon: BehaviorSubject<Polygon> = new BehaviorSubject({name: '', color: 'orange', coords: []} as Polygon)
- polygons: BehaviorSubject<Polygon[]> = new BehaviorSubject(JSON.parse(localStorage.getItem('polygons') || '') || [])
+ polygons: BehaviorSubject<Polygon[]> = new BehaviorSubject(JSON.parse(localStorage.getItem('polygons') || '') || this.mockedPolygons)
   constructor() { }
   
   setActivePolygon(polygon: Polygon) {
@@ -70,8 +70,6 @@ export class AppService {
   }
   
   addPolygon(polygon: any) {
-    console.log(polygon)
-
     const mapPolygon = {name:polygon.name, color: polygon.color, coords: [
       [polygon.point1.latitude, polygon.point1.longitude],
       [polygon.point2.latitude, polygon.point2.longitude],
@@ -81,8 +79,18 @@ export class AppService {
     
     this.polygons.pipe(take(1)).subscribe(polygons => {
       const updPolygons = [...polygons, mapPolygon]
-      localStorage.setItem('polygons', JSON.stringify(updPolygons))
-      this.polygons.next(updPolygons)
+      this.updatePolygonsList(updPolygons)
     })
+  }
+  
+  deletePolygon(name: string) {
+    this.polygons.pipe(map(polygons => polygons.filter(v => v.name !== name))).subscribe(polygons => {
+      this.updatePolygonsList(polygons)
+    })
+  }
+  
+  private updatePolygonsList(polygons: Polygon[]) {
+    localStorage.setItem('polygons', JSON.stringify(polygons))
+    this.polygons.next(polygons)
   }
 }

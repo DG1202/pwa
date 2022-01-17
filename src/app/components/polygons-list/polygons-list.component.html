@@ -1,0 +1,6 @@
+<ul>
+    <li *ngFor="let polygon of polygons$ | async">
+        <span [ngStyle]="{color: polygon.color}">{{polygon.name}}</span>
+        <button (click)="deletePolygon(polygon.name)">X</button>
+    </li>
+</ul>
