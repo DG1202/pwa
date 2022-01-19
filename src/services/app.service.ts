@@ -70,9 +70,9 @@ export class AppService {
        [49.81409181125535, 24.054747689464833]
      ]
    }
- ]
- polygon: BehaviorSubject<Polygon> = new BehaviorSubject({name: '', color: 'orange', coords: []} as Polygon)
- polygons: BehaviorSubject<Polygon[]> = new BehaviorSubject(JSON.parse(localStorage.getItem('polygons') || JSON.stringify(this.mockedPolygons)) || this.mockedPolygons)
+  ]
+  polygon: BehaviorSubject<Polygon> = new BehaviorSubject({name: '', color: '#F8F8F8', coords: []} as Polygon);
+  polygons: BehaviorSubject<Polygon[]> = new BehaviorSubject(JSON.parse(localStorage.getItem('polygons') || '[]'));
   constructor() { }
   
   setActivePolygon(polygon: Polygon) {
@@ -99,8 +99,8 @@ export class AppService {
     })
   }
   
-  updatePolygonsList(polygons: Polygon[]) {
-    localStorage.setItem('polygons', JSON.stringify(polygons))
-    // this.polygons.next(polygons)
+  private updatePolygonsList(polygons: Polygon[]) {
+    localStorage.setItem('polygons', JSON.stringify(polygons));
+    this.polygons.next(polygons);
   }
 }

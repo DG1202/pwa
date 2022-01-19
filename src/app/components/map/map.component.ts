@@ -10,7 +10,7 @@ import {AppService, Polygon} from "../../../services/app.service";
 export class MapComponent implements OnInit {
   
   getCoords!: any;
-  watchCoords!: any  ;
+  watchCoords!: any;
   private myMap: any;
   private marker: any;
   private icon = {
@@ -24,8 +24,7 @@ export class MapComponent implements OnInit {
   private polygons: any[] = [];
   private serverPolygons: Polygon[] = [];
   
-  constructor(private appService: AppService) {
-  }
+  constructor(private appService: AppService) {};
   
   ngOnInit(): void {
     this.getInitPosition();
@@ -33,21 +32,19 @@ export class MapComponent implements OnInit {
   }
   
   private getInitPosition() {
-   
     navigator.geolocation.getCurrentPosition((position => {
       this.getCoords = position.coords
       this.myMap = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
       this.marker = L.marker([this.getCoords.latitude, this.getCoords.longitude], this.icon).addTo(this.myMap);
       
       this.appService.polygons.subscribe(polygons => {
-        this.appService.updatePolygonsList(polygons);
-        const polygonsNames = this.serverPolygons.map(v => v.name)
+        const polygonsNames = this.serverPolygons.map(v => v.name);
         const newPolygons = polygons.filter(polygon => {
-          return !(polygonsNames.includes(polygon.name))
-        })
-        this.serverPolygons = polygons
+          return !(polygonsNames.includes(polygon.name));
+        });
+        this.serverPolygons = polygons;
         newPolygons.forEach(polygon => {
-          this.polygons.push(L.polygon(polygon.coords, {color: polygon.color}).addTo(this.myMap))
+          this.polygons.push(L.polygon(polygon.coords, {color: polygon.color}).addTo(this.myMap));
         })
       })
       
@@ -71,7 +68,7 @@ export class MapComponent implements OnInit {
           isActivePolygon = true;
         }
         if(!isActivePolygon) {
-          this.appService.setActivePolygon({name: '', color: 'orange', coords: []} as Polygon);
+          this.appService.setActivePolygon({name: '', color: '#F8F8F8', coords: []} as Polygon);
         }
       })
       
