@@ -40,6 +40,7 @@ export class MapComponent implements OnInit {
       this.marker = L.marker([this.getCoords.latitude, this.getCoords.longitude], this.icon).addTo(this.myMap);
       
       this.appService.polygons.subscribe(polygons => {
+        this.appService.updatePolygonsList(polygons);
         const polygonsNames = this.serverPolygons.map(v => v.name)
         const newPolygons = polygons.filter(polygon => {
           return !(polygonsNames.includes(polygon.name))

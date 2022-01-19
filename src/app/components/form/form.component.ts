@@ -41,5 +41,6 @@ export class FormComponent implements OnInit {
   
   onSubmit(value: Number[][]) {
     this.appService.addPolygon(value);
+    this.polygonForm.reset();
   }
 }

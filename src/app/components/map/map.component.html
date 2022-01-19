@@ -1,9 +1,5 @@
 <p>
-    <b>Get coords: </b> {{getCoords?.latitude}} - {{getCoords?.longitude}}
-</p>
-
-<p>
-    <b>Watch coords: </b> {{watchCoords?.latitude}} - {{watchCoords?.longitude}} - {{watchCoords?.altitude}}
+    <b>Your location: </b> {{watchCoords?.latitude}} - {{watchCoords?.longitude}} {{watchCoords?.altitude ? '-' + watchCoords?.altitude : ''}}
 </p>
 
 <div id="map"></div>

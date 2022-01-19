@@ -1,6 +1,9 @@
-<ul>
-    <li *ngFor="let polygon of polygons$ | async">
-        <span [ngStyle]="{color: polygon.color}">{{polygon.name}}</span>
-        <button (click)="deletePolygon(polygon.name)">X</button>
-    </li>
-</ul>
+<ng-container *ngIf="(polygons$ | async)?.length">
+    <h2>Delete geofence</h2>
+    <ul>
+        <li *ngFor="let polygon of polygons$ | async">
+            <span [ngStyle]="{color: polygon.color}">{{polygon.name}}</span>
+            <button (click)="deletePolygon(polygon.name)">X</button>
+        </li>
+    </ul>
+</ng-container>

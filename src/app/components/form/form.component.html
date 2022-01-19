@@ -1,4 +1,4 @@
-<h2>Create polygon</h2>
+<h2>Add new geofence</h2>
 <form [formGroup]="polygonForm" (ngSubmit)="onSubmit(polygonForm.value)">
     <div class="form-group-wrapper">
         <div class="form-group-wrapper">
@@ -12,7 +12,6 @@
             </div>
         </div>
     </div>
-
 
     <div formGroupName="point1">
         <h4>Point 1</h4>
@@ -67,5 +66,5 @@
         </div>
 
     </div>
-    <button type="submit" [disabled]="polygonForm.invalid">Add polygon</button>
+    <button type="submit" [disabled]="polygonForm.invalid">Add geofence</button>
 </form>

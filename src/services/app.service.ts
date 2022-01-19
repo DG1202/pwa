@@ -99,8 +99,8 @@ export class AppService {
     })
   }
   
-  private updatePolygonsList(polygons: Polygon[]) {
+  updatePolygonsList(polygons: Polygon[]) {
     localStorage.setItem('polygons', JSON.stringify(polygons))
-    this.polygons.next(polygons)
+    // this.polygons.next(polygons)
   }
 }
