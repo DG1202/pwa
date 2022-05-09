@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
       this.headerColor = polygon.color;
       this.zone = polygon.name;
     })
-    this.updateManifest();
+    // this.updateManifest();
   }
 
   updateManifest(): void {
