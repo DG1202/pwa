@@ -28,9 +28,7 @@ export class HeaderComponent implements OnInit {
       console.log('a2hs installed');
     });
 
-  this.getInstalledApps();
-
-
+    this.baforeInstallPromt()
   }
 
   async getInstalledApps() {
@@ -39,7 +37,7 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  updateManifest(): void {
+  updateManifest() {
     const currentLocation = window.location.origin;
     var myDynamicManifest = {
       "name": "Your Great Site",
@@ -67,4 +65,19 @@ export class HeaderComponent implements OnInit {
     getDataUrlForBase64(base64String: string, mimetype: string) {
       return `data:${mimetype};base64,${base64String}`;
     }
+
+    baforeInstallPromt() {
+      this.getInstalledApps();
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('event', e)
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        const deferredPrompt = e;
+
+
+        });
+    }
+
 }
