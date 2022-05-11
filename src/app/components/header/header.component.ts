@@ -19,6 +19,24 @@ export class HeaderComponent implements OnInit {
       this.zone = polygon.name;
     })
     this.updateManifest();
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      console.log('display-mode is standalone');
+    }
+
+    window.addEventListener('appinstalled', (evt) => {
+      console.log('a2hs installed');
+    });
+
+  this.getInstalledApps();
+
+
+  }
+
+  async getInstalledApps() {
+    const installedApps = await (navigator as any).getInstalledRelatedApps();
+    console.log(installedApps);
+
   }
 
   updateManifest(): void {
