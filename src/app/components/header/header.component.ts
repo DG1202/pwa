@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:beforeinstallprompt', ['$event'])
   onBeforeInstallPrompt(e: any) {
+
     console.log('beforeinstallprompt', e);
     e.preventDefault();
     this.installPwaLater = e;
@@ -33,6 +34,7 @@ export class HeaderComponent implements OnInit {
   constructor(private appService: AppService) { }
 
   ngOnInit(): void {
+    console.log('serviseWorker' in navigator)
     this.appService.polygon.subscribe(polygon => {
       this.headerColor = polygon.color;
       this.zone = polygon.name;
