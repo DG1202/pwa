@@ -18,15 +18,15 @@ export class HeaderComponent implements OnInit {
   onBeforeInstallPrompt(e: any) {
 
     console.log('beforeinstallprompt', e);
-    e.preventDefault();
+    // e.preventDefault();
     this.installPwaLater = e;
     this.isVisible$.next(true)
   }
 
   @HostListener('window:appinstalled', ['$event'])
   onAppInstalled(e: any) {
-    console.log('beforeinstallprompt', e);
-    e.preventDefault();
+    console.log('appinstalled HostListener', e);
+    // e.preventDefault();
     this.installPwaLater = null;
     this.isVisible$.next(false)
   }
