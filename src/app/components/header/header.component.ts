@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
       this.headerColor = polygon.color;
       this.zone = polygon.name;
     })
-    this.updateManifest();
+    // this.updateManifest();
 
     // if (window.matchMedia('(display-mode: standalone)').matches) {
     //   console.log('display-mode is standalone');
