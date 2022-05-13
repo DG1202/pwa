@@ -31,10 +31,12 @@ export class HeaderComponent implements OnInit {
     this.isVisible$.next(false)
   }
 
+  isServiceWorker = 'serviceWorker' in navigator
+
   constructor(private appService: AppService) { }
 
   ngOnInit(): void {
-    console.log('serviceWorker' in navigator)
+    console.log(this.isServiceWorker)
     this.appService.polygon.subscribe(polygon => {
       this.headerColor = polygon.color;
       this.zone = polygon.name;
